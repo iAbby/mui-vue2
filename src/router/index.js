@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import store from '../store'
-
+import axios from 'axios'
 // import Index from '@/components/index/index'
 // import Find from '@/components/find/find'
 // import Order from '@/components/order/order'
@@ -190,5 +190,14 @@ const router = new Router({
 			store.dispatch('updateNavbarStatus',{isShowHead:to.meta.isShowHead,isShowFoot:to.meta.isShowFoot,isShowBack:to.meta.isShowBack})			
 			document.title = "加时代-" + to.meta.title || "";
 		}		
+		// 跨域请求例子
+		var aa = new Promise((resolve,reject)=>{
+      axios.get(`/bgs/poi/reverse_geo_coding?latitude=22.534607&longitude=113.972976`)
+      .then((response)=>{
+        const locationName = response.data.name;
+        resolve(locationName);
+      })
+    })
+		console.log(aa)
 	})
 	export default router

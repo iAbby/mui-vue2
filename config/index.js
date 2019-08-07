@@ -24,11 +24,33 @@ module.exports = {
   },
   dev: {
     env: require('./dev.env'),
-    port: 8080,
+    port: 8050,
     autoOpenBrowser: true,
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {},
+    proxyTable: {
+    	'/bgs': {
+        target: 'https://restapi.ele.me',//后端接口地址
+        changeOrigin: true,//是否允许跨越
+        pathRewrite: {
+          '^/bgs': '/bgs',//重写,
+        }
+    	},
+			'/shopping': {
+        target: 'https://restapi.ele.me',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/shopping': '/shopping',//重写,
+        }
+    	},	        
+			'/ugc': {
+		    target: 'https://restapi.ele.me',
+		    changeOrigin: true,
+		    pathRewrite: {
+          '^/ugc': '/ugc',//重写,
+        }
+    	}
+    },
     // CSS Sourcemaps off by default because relative paths are "buggy"
     // with this option, according to the CSS-Loader README
     // (https://github.com/webpack/css-loader#sourcemaps)
